@@ -90,7 +90,7 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 
     }
 
-	public deleteAccount(long accountId) throws PortalException{
+	public Account deleteAccount(long accountId) throws PortalException{
 		Account account = account.deleteAccount(accountId);
 
 		return accountPersistence.remove(account);

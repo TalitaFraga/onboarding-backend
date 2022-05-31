@@ -24,5 +24,5 @@ create table AMF_Account (
 	zip VARCHAR(75) null,
 	securityQuestion VARCHAR(75) null,
 	securityAnswer VARCHAR(75) null,
-	accepted_tou BOOLEAN
+	acceptedTou VARCHAR(75) null
 );

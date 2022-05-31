@@ -27,6 +27,6 @@
 		<field name="zip" type="String" />
 		<field name="securityQuestion" type="String" />
 		<field name="securityAnswer" type="String" />
-		<field name="accepted_tou" type="boolean" />
+		<field name="acceptedTou" type="String" />
 	</model>
 </model-hints>

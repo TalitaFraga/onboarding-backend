@@ -456,25 +456,19 @@ public interface AccountModel
 	public void setSecurityAnswer(String securityAnswer);
 
 	/**
-	 * Returns the accepted_tou of this account.
+	 * Returns the accepted tou of this account.
 	 *
-	 * @return the accepted_tou of this account
+	 * @return the accepted tou of this account
 	 */
-	public boolean getAccepted_tou();
+	@AutoEscape
+	public String getAcceptedTou();
 
 	/**
-	 * Returns <code>true</code> if this account is accepted_tou.
+	 * Sets the accepted tou of this account.
 	 *
-	 * @return <code>true</code> if this account is accepted_tou; <code>false</code> otherwise
+	 * @param acceptedTou the accepted tou of this account
 	 */
-	public boolean isAccepted_tou();
-
-	/**
-	 * Sets whether this account is accepted_tou.
-	 *
-	 * @param accepted_tou the accepted_tou of this account
-	 */
-	public void setAccepted_tou(boolean accepted_tou);
+	public void setAcceptedTou(String acceptedTou);
 
 	@Override
 	public Account cloneWithOriginalValues();

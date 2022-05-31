@@ -85,7 +85,7 @@ public class AccountModelImpl
 		{"address", Types.VARCHAR}, {"address2", Types.VARCHAR},
 		{"city", Types.VARCHAR}, {"state_", Types.VARCHAR},
 		{"zip", Types.VARCHAR}, {"securityQuestion", Types.VARCHAR},
-		{"securityAnswer", Types.VARCHAR}, {"accepted_tou", Types.BOOLEAN}
+		{"securityAnswer", Types.VARCHAR}, {"acceptedTou", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -117,11 +117,11 @@ public class AccountModelImpl
 		TABLE_COLUMNS_MAP.put("zip", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("securityQuestion", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("securityAnswer", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("accepted_tou", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("acceptedTou", Types.VARCHAR);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table AMF_Account (uuid_ VARCHAR(75) null,accountId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,emailAddress VARCHAR(75) null,userName_ VARCHAR(75) null,gender VARCHAR(75) null,birthday DATE null,password1 VARCHAR(75) null,password2 VARCHAR(75) null,homePhone INTEGER,mobilePhone INTEGER,address VARCHAR(75) null,address2 VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,zip VARCHAR(75) null,securityQuestion VARCHAR(75) null,securityAnswer VARCHAR(75) null,accepted_tou BOOLEAN)";
+		"create table AMF_Account (uuid_ VARCHAR(75) null,accountId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,emailAddress VARCHAR(75) null,userName_ VARCHAR(75) null,gender VARCHAR(75) null,birthday DATE null,password1 VARCHAR(75) null,password2 VARCHAR(75) null,homePhone INTEGER,mobilePhone INTEGER,address VARCHAR(75) null,address2 VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,zip VARCHAR(75) null,securityQuestion VARCHAR(75) null,securityAnswer VARCHAR(75) null,acceptedTou VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table AMF_Account";
 
@@ -353,10 +353,10 @@ public class AccountModelImpl
 		attributeSetterBiConsumers.put(
 			"securityAnswer",
 			(BiConsumer<Account, String>)Account::setSecurityAnswer);
-		attributeGetterFunctions.put("accepted_tou", Account::getAccepted_tou);
+		attributeGetterFunctions.put("acceptedTou", Account::getAcceptedTou);
 		attributeSetterBiConsumers.put(
-			"accepted_tou",
-			(BiConsumer<Account, Boolean>)Account::setAccepted_tou);
+			"acceptedTou",
+			(BiConsumer<Account, String>)Account::setAcceptedTou);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -871,23 +871,22 @@ public class AccountModelImpl
 
 	@JSON
 	@Override
-	public boolean getAccepted_tou() {
-		return _accepted_tou;
+	public String getAcceptedTou() {
+		if (_acceptedTou == null) {
+			return "";
+		}
+		else {
+			return _acceptedTou;
+		}
 	}
 
-	@JSON
 	@Override
-	public boolean isAccepted_tou() {
-		return _accepted_tou;
-	}
-
-	@Override
-	public void setAccepted_tou(boolean accepted_tou) {
+	public void setAcceptedTou(String acceptedTou) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
 
-		_accepted_tou = accepted_tou;
+		_acceptedTou = acceptedTou;
 	}
 
 	@Override
@@ -977,7 +976,7 @@ public class AccountModelImpl
 		accountImpl.setZip(getZip());
 		accountImpl.setSecurityQuestion(getSecurityQuestion());
 		accountImpl.setSecurityAnswer(getSecurityAnswer());
-		accountImpl.setAccepted_tou(isAccepted_tou());
+		accountImpl.setAcceptedTou(getAcceptedTou());
 
 		accountImpl.resetOriginalValues();
 
@@ -1029,8 +1028,8 @@ public class AccountModelImpl
 			this.<String>getColumnOriginalValue("securityQuestion"));
 		accountImpl.setSecurityAnswer(
 			this.<String>getColumnOriginalValue("securityAnswer"));
-		accountImpl.setAccepted_tou(
-			this.<Boolean>getColumnOriginalValue("accepted_tou"));
+		accountImpl.setAcceptedTou(
+			this.<String>getColumnOriginalValue("acceptedTou"));
 
 		return accountImpl;
 	}
@@ -1273,7 +1272,13 @@ public class AccountModelImpl
 			accountCacheModel.securityAnswer = null;
 		}
 
-		accountCacheModel.accepted_tou = isAccepted_tou();
+		accountCacheModel.acceptedTou = getAcceptedTou();
+
+		String acceptedTou = accountCacheModel.acceptedTou;
+
+		if ((acceptedTou != null) && (acceptedTou.length() == 0)) {
+			accountCacheModel.acceptedTou = null;
+		}
 
 		return accountCacheModel;
 	}
@@ -1393,7 +1398,7 @@ public class AccountModelImpl
 	private String _zip;
 	private String _securityQuestion;
 	private String _securityAnswer;
-	private boolean _accepted_tou;
+	private String _acceptedTou;
 
 	public <T> T getColumnValue(String columnName) {
 		columnName = _attributeNames.getOrDefault(columnName, columnName);
@@ -1449,7 +1454,7 @@ public class AccountModelImpl
 		_columnOriginalValues.put("zip", _zip);
 		_columnOriginalValues.put("securityQuestion", _securityQuestion);
 		_columnOriginalValues.put("securityAnswer", _securityAnswer);
-		_columnOriginalValues.put("accepted_tou", _accepted_tou);
+		_columnOriginalValues.put("acceptedTou", _acceptedTou);
 	}
 
 	private static final Map<String, String> _attributeNames;
@@ -1524,7 +1529,7 @@ public class AccountModelImpl
 
 		columnBitmasks.put("securityAnswer", 16777216L);
 
-		columnBitmasks.put("accepted_tou", 33554432L);
+		columnBitmasks.put("acceptedTou", 33554432L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

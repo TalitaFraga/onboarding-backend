@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
@@ -88,7 +89,7 @@ public interface AccountLocalService
 
 	public Account createAccount(
 		long accountId, String firstName, String lastName, String emailAddress,
-		String userName_, String male, Date birthday, String password1,
+		String userName_, String gender, Date birthday, String password1,
 		String password2, int homePhone, int mobilePhone, String address,
 		String address2, String city, String state, String zip,
 		String securityQuestion, String securityAnswer, String acceptedTou);
@@ -328,7 +329,7 @@ public interface AccountLocalService
 
 	public Account updateAccount(
 			long accountId, String firstName, String lastName,
-			String emailAddress, String userName_, String male, Date birthday,
+			String emailAddress, String userName_, String gender, Date birthday,
 			String password1, String password2, int homePhone, int mobilePhone,
 			String address, String address2, String city, String state,
 			String zip, String securityQuestion, String securityAnswer,

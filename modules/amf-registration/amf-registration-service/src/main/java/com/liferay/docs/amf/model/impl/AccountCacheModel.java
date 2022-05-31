@@ -112,8 +112,8 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		sb.append(securityQuestion);
 		sb.append(", securityAnswer=");
 		sb.append(securityAnswer);
-		sb.append(", accepted_tou=");
-		sb.append(accepted_tou);
+		sb.append(", acceptedTou=");
+		sb.append(acceptedTou);
 		sb.append("}");
 
 		return sb.toString();
@@ -264,7 +264,12 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			accountImpl.setSecurityAnswer(securityAnswer);
 		}
 
-		accountImpl.setAccepted_tou(accepted_tou);
+		if (acceptedTou == null) {
+			accountImpl.setAcceptedTou("");
+		}
+		else {
+			accountImpl.setAcceptedTou(acceptedTou);
+		}
 
 		accountImpl.resetOriginalValues();
 
@@ -304,8 +309,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		zip = objectInput.readUTF();
 		securityQuestion = objectInput.readUTF();
 		securityAnswer = objectInput.readUTF();
-
-		accepted_tou = objectInput.readBoolean();
+		acceptedTou = objectInput.readUTF();
 	}
 
 	@Override
@@ -439,7 +443,12 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			objectOutput.writeUTF(securityAnswer);
 		}
 
-		objectOutput.writeBoolean(accepted_tou);
+		if (acceptedTou == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(acceptedTou);
+		}
 	}
 
 	public String uuid;
@@ -467,6 +476,6 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 	public String zip;
 	public String securityQuestion;
 	public String securityAnswer;
-	public boolean accepted_tou;
+	public String acceptedTou;
 
 }

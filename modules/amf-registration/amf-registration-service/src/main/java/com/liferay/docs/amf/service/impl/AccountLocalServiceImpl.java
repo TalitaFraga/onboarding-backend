@@ -15,7 +15,10 @@
 package com.liferay.docs.amf.service.impl;
 
 import com.liferay.docs.amf.service.base.AccountLocalServiceBaseImpl;
+import com.liferay.docs.amf.model.Account;
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.exception.PortalException;
+import java.util.Date;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -29,18 +32,18 @@ import org.osgi.service.component.annotations.Component;
 public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 
     public Account createAccount(long accountId, String firstName, String lastName, String emailAddress, String userName_,
-                                 String male, Date birthday, String password1, String password2, int homePhone,
+                                 String gender, Date birthday, String password1, String password2, int homePhone,
                                  int mobilePhone, String address, String address2, String city, String state, String zip,
                                  String securityQuestion, String securityAnswer, String acceptedTou) {
 
-        Account account = addAccount(accountId);
+        Account account = createAccount(accountId);
 
         account.setAccountId(accountId);
         account.setFirstName(firstName);
         account.setLastName(lastName);
         account.setEmailAddress(emailAddress);
         account.setUserName_(userName_);
-        account.setGender(male);
+        account.setGender(gender);
         account.setBirthday(birthday);
         account.setPassword1(password1);
         account.setPassword2(password2);
@@ -53,14 +56,14 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
         account.setZip(zip);
         account.setSecurityQuestion(securityQuestion);
         account.setSecurityAnswer(securityAnswer);
-        account.setAcceptedTou(staacceptedToute);
+        account.setAcceptedTou(acceptedTou);
 
         return accountPersistence.update(account);
 
     }
 
     public Account updateAccount(long accountId, String firstName, String lastName, String emailAddress, String userName_,
-                                 String male, Date birthday, String password1, String password2, int homePhone,
+                                 String gender, Date birthday, String password1, String password2, int homePhone,
                                  int mobilePhone, String address, String address2, String city, String state, String zip,
                                  String securityQuestion, String securityAnswer, String acceptedTou) throws PortalException {
 
@@ -71,7 +74,7 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
         account.setLastName(lastName);
         account.setEmailAddress(emailAddress);
         account.setUserName_(userName_);
-        account.setGender(male);
+        account.setGender(gender);
         account.setBirthday(birthday);
         account.setPassword1(password1);
         account.setPassword2(password2);
@@ -84,19 +87,16 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
         account.setZip(zip);
         account.setSecurityQuestion(securityQuestion);
         account.setSecurityAnswer(securityAnswer);
-        account.setAcceptedTou(staacceptedToute);
+        account.setAcceptedTou(acceptedTou);
 
         return accountPersistence.update(account);
 
     }
 
-	public Account deleteAccount(long accountId) throws PortalException{
-		Account account = account.deleteAccount(accountId);
+    public Account deleteAccount(long accountId) throws PortalException{
+        Account account = deleteAccount(accountId);
 
-		return accountPersistence.remove(account);
-	}
-
-
-
+        return accountPersistence.remove(account);
+    }
 
 }

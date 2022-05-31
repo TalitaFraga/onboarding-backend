@@ -41,7 +41,7 @@
 		<column name="zip" type="String" />
 		<column name="securityQuestion" type="String" />
 		<column name="securityAnswer" type="String" />
-		<column name="accepted_tou" type="boolean" />
+		<column name="acceptedTou" type="String" />
 
 		<!-- Order -->
 

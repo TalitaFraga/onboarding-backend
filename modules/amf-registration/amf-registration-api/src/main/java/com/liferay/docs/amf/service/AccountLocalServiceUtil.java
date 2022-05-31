@@ -71,13 +71,13 @@ public class AccountLocalServiceUtil {
 
 	public static Account createAccount(
 		long accountId, String firstName, String lastName, String emailAddress,
-		String userName_, String male, Date birthday, String password1,
-		String password2, int homePhone, int mobilePhone, String address,
-		String address2, String city, String state, String zip,
+		String userName_, String gender, java.util.Date birthday,
+		String password1, String password2, int homePhone, int mobilePhone,
+		String address, String address2, String city, String state, String zip,
 		String securityQuestion, String securityAnswer, String acceptedTou) {
 
 		return getService().createAccount(
-			accountId, firstName, lastName, emailAddress, userName_, male,
+			accountId, firstName, lastName, emailAddress, userName_, gender,
 			birthday, password1, password2, homePhone, mobilePhone, address,
 			address2, city, state, zip, securityQuestion, securityAnswer,
 			acceptedTou);
@@ -369,15 +369,15 @@ public class AccountLocalServiceUtil {
 
 	public static Account updateAccount(
 			long accountId, String firstName, String lastName,
-			String emailAddress, String userName_, String male, Date birthday,
-			String password1, String password2, int homePhone, int mobilePhone,
-			String address, String address2, String city, String state,
-			String zip, String securityQuestion, String securityAnswer,
-			String acceptedTou)
+			String emailAddress, String userName_, String gender,
+			java.util.Date birthday, String password1, String password2,
+			int homePhone, int mobilePhone, String address, String address2,
+			String city, String state, String zip, String securityQuestion,
+			String securityAnswer, String acceptedTou)
 		throws PortalException {
 
 		return getService().updateAccount(
-			accountId, firstName, lastName, emailAddress, userName_, male,
+			accountId, firstName, lastName, emailAddress, userName_, gender,
 			birthday, password1, password2, homePhone, mobilePhone, address,
 			address2, city, state, zip, securityQuestion, securityAnswer,
 			acceptedTou);

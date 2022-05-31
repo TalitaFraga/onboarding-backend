@@ -82,8 +82,8 @@ public class AccountTable extends BaseTable<AccountTable> {
 		"securityQuestion", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<AccountTable, String> securityAnswer = createColumn(
 		"securityAnswer", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
-	public final Column<AccountTable, Boolean> accepted_tou = createColumn(
-		"accepted_tou", Boolean.class, Types.BOOLEAN, Column.FLAG_DEFAULT);
+	public final Column<AccountTable, String> acceptedTou = createColumn(
+		"acceptedTou", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 
 	private AccountTable() {
 		super("AMF_Account", AccountTable::new);

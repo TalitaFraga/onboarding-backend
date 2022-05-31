@@ -68,7 +68,7 @@ public class AccountWrapper
 		attributes.put("zip", getZip());
 		attributes.put("securityQuestion", getSecurityQuestion());
 		attributes.put("securityAnswer", getSecurityAnswer());
-		attributes.put("accepted_tou", isAccepted_tou());
+		attributes.put("acceptedTou", getAcceptedTou());
 
 		return attributes;
 	}
@@ -225,10 +225,10 @@ public class AccountWrapper
 			setSecurityAnswer(securityAnswer);
 		}
 
-		Boolean accepted_tou = (Boolean)attributes.get("accepted_tou");
+		String acceptedTou = (String)attributes.get("acceptedTou");
 
-		if (accepted_tou != null) {
-			setAccepted_tou(accepted_tou);
+		if (acceptedTou != null) {
+			setAcceptedTou(acceptedTou);
 		}
 	}
 
@@ -238,13 +238,13 @@ public class AccountWrapper
 	}
 
 	/**
-	 * Returns the accepted_tou of this account.
+	 * Returns the accepted tou of this account.
 	 *
-	 * @return the accepted_tou of this account
+	 * @return the accepted tou of this account
 	 */
 	@Override
-	public boolean getAccepted_tou() {
-		return model.getAccepted_tou();
+	public String getAcceptedTou() {
+		return model.getAcceptedTou();
 	}
 
 	/**
@@ -517,29 +517,19 @@ public class AccountWrapper
 		return model.getZip();
 	}
 
-	/**
-	 * Returns <code>true</code> if this account is accepted_tou.
-	 *
-	 * @return <code>true</code> if this account is accepted_tou; <code>false</code> otherwise
-	 */
-	@Override
-	public boolean isAccepted_tou() {
-		return model.isAccepted_tou();
-	}
-
 	@Override
 	public void persist() {
 		model.persist();
 	}
 
 	/**
-	 * Sets whether this account is accepted_tou.
+	 * Sets the accepted tou of this account.
 	 *
-	 * @param accepted_tou the accepted_tou of this account
+	 * @param acceptedTou the accepted tou of this account
 	 */
 	@Override
-	public void setAccepted_tou(boolean accepted_tou) {
-		model.setAccepted_tou(accepted_tou);
+	public void setAcceptedTou(String acceptedTou) {
+		model.setAcceptedTou(acceptedTou);
 	}
 
 	/**

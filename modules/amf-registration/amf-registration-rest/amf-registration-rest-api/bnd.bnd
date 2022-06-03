@@ -1,0 +1,6 @@
+Bundle-Name: amf-registration-rest-api
+Bundle-SymbolicName: com.liferay.docs.modules.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.docs.modules.dto.v1_0,\
+	com.liferay.docs.modules.resource.v1_0

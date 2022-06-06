@@ -4,6 +4,6 @@ application:
     baseURI: "/amf-registration-rest"
     className: "AmfRegistrationRestApplication"
     name: "AmfRegistrationRest"
-author: "me"
+author: "TalitaFraga"
 clientDir: "../amf-registration-rest-client/src/main/java"
 testDir: "../amf-registration-rest-test/src/testIntegration/java"

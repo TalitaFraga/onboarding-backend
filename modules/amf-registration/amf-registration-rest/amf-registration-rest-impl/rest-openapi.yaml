@@ -20,7 +20,7 @@ components:
           type: string
         birthday:
           description: The birthday.
-          type: Date
+          type: string
         password1:
           description: The password.
           type: string
@@ -29,10 +29,10 @@ components:
           type: string
         homePhone:
           description: The home phone.
-          type: int
+          type: string
         mobilePhone:
           description: The mobile phone.
-          type: int
+          type: string
         address:
           description: The address home.
           type: string
@@ -58,7 +58,7 @@ components:
           description: Terms of use.
           type: string
 
-
+info:
   description: "AmfRegistrationRest REST API"
   license:
     name: "Apache 2.0"
@@ -202,7 +202,7 @@ paths:
         operationId: getAccount
         parameters:
           - in: path
-          name: accountId
+            name: accountId
             required: true
             schema:
               type: string
@@ -217,47 +217,3 @@ paths:
                   $ref: "#/components/schemas/Account"
             description: "Successfully returned datas of account"
         tags: [ "Account" ]
-
-      delete:
-        operationId: deleteAccount
-        parameters:
-          - in: path
-              name: accountId
-              required: true
-              schema:
-                type: string
-          responses:
-            204:
-              content:
-                application/json: { }
-                application/xml: { }
-              description: "Successfully deteled account"
-          tags: [ "Account" ]
-
-          put:
-            operationId: updateAccount
-            parameters:
-              - in: path
-                name: accountId
-                required: true
-                schema:
-                  type: string
-            requestBody:
-              content:
-                application/json:
-                  schema:
-                    $ref: "#/components/schemas/Account"
-                application/xml:
-                  schema:
-                    $ref: "#/components/schemas/Account"
-            responses:
-              200:
-                content:
-                  application/json:
-                    schema:
-                      $ref: "#/components/schemas/Account"
-                  application/xml:
-                    schema:
-                      $ref: "#/components/schemas/Account"
-                description: "Successfully returned datas of account"
-            tags: [ "Account" ]

@@ -31,14 +31,15 @@ import org.osgi.service.component.annotations.Component;
 )
 public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 
-    public Account createAccount(long accountId, String firstName, String lastName, String emailAddress, String userName_,
-                                 String gender, Date birthday, String password1, String password2, int homePhone,
-                                 int mobilePhone, String address, String address2, String city, String state, String zip,
+    public Account createAccount(String firstName, String lastName, String emailAddress, String userName_,
+                                 String gender, String birthday, String password1, String password2, String homePhone,
+                                 String mobilePhone, String address, String address2, String city, String state, String zip,
                                  String securityQuestion, String securityAnswer, String acceptedTou) {
+        long accountId = counterLocalService.increment(Account.class.getName());
+        Account account = createAccount(String.valueOf(accountId));
 
-        Account account = createAccount(accountId);
 
-        account.setAccountId(accountId);
+        account.setAccountId(String.valueOf(accountId));
         account.setFirstName(firstName);
         account.setLastName(lastName);
         account.setEmailAddress(emailAddress);
@@ -62,14 +63,14 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 
     }
 
-    public Account updateAccount(long accountId, String firstName, String lastName, String emailAddress, String userName_,
-                                 String gender, Date birthday, String password1, String password2, int homePhone,
-                                 int mobilePhone, String address, String address2, String city, String state, String zip,
+    public Account updateAccount(String accountId, String firstName, String lastName, String emailAddress, String userName_,
+                                 String gender, String birthday, String password1, String password2, String homePhone,
+                                 String mobilePhone, String address, String address2, String city, String state, String zip,
                                  String securityQuestion, String securityAnswer, String acceptedTou) throws PortalException {
 
         Account account = getAccount(accountId);
 
-
+        account.setAccountId(accountId);
         account.setFirstName(firstName);
         account.setLastName(lastName);
         account.setEmailAddress(emailAddress);

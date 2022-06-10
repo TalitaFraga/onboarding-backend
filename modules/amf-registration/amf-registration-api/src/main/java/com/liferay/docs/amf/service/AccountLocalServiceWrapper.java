@@ -58,23 +58,22 @@ public class AccountLocalServiceWrapper
 	 * @return the new account
 	 */
 	@Override
-	public com.liferay.docs.amf.model.Account createAccount(long accountId) {
+	public com.liferay.docs.amf.model.Account createAccount(String accountId) {
 		return _accountLocalService.createAccount(accountId);
 	}
 
 	@Override
 	public com.liferay.docs.amf.model.Account createAccount(
-		long accountId, String firstName, String lastName, String emailAddress,
-		String userName_, String gender, java.util.Date birthday,
-		String password1, String password2, int homePhone, int mobilePhone,
-		String address, String address2, String city, String state, String zip,
+		String firstName, String lastName, String emailAddress,
+		String userName_, String gender, String birthday, String password1,
+		String password2, String homePhone, String mobilePhone, String address,
+		String address2, String city, String state, String zip,
 		String securityQuestion, String securityAnswer, String acceptedTou) {
 
 		return _accountLocalService.createAccount(
-			accountId, firstName, lastName, emailAddress, userName_, gender,
-			birthday, password1, password2, homePhone, mobilePhone, address,
-			address2, city, state, zip, securityQuestion, securityAnswer,
-			acceptedTou);
+			firstName, lastName, emailAddress, userName_, gender, birthday,
+			password1, password2, homePhone, mobilePhone, address, address2,
+			city, state, zip, securityQuestion, securityAnswer, acceptedTou);
 	}
 
 	/**
@@ -105,6 +104,13 @@ public class AccountLocalServiceWrapper
 		return _accountLocalService.deleteAccount(account);
 	}
 
+	@Override
+	public com.liferay.docs.amf.model.Account deleteAccount(long accountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _accountLocalService.deleteAccount(accountId);
+	}
+
 	/**
 	 * Deletes the account with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
@@ -117,7 +123,7 @@ public class AccountLocalServiceWrapper
 	 * @throws PortalException if a account with the primary key could not be found
 	 */
 	@Override
-	public com.liferay.docs.amf.model.Account deleteAccount(long accountId)
+	public com.liferay.docs.amf.model.Account deleteAccount(String accountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _accountLocalService.deleteAccount(accountId);
@@ -236,7 +242,7 @@ public class AccountLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.docs.amf.model.Account fetchAccount(long accountId) {
+	public com.liferay.docs.amf.model.Account fetchAccount(String accountId) {
 		return _accountLocalService.fetchAccount(accountId);
 	}
 
@@ -262,7 +268,7 @@ public class AccountLocalServiceWrapper
 	 * @throws PortalException if a account with the primary key could not be found
 	 */
 	@Override
-	public com.liferay.docs.amf.model.Account getAccount(long accountId)
+	public com.liferay.docs.amf.model.Account getAccount(String accountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _accountLocalService.getAccount(accountId);
@@ -348,30 +354,6 @@ public class AccountLocalServiceWrapper
 		return _accountLocalService.getAccountsCount();
 	}
 
-	@Override
-	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
-		getActionableDynamicQuery() {
-
-		return _accountLocalService.getActionableDynamicQuery();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
-		getExportActionableDynamicQuery(
-			com.liferay.exportimport.kernel.lar.PortletDataContext
-				portletDataContext) {
-
-		return _accountLocalService.getExportActionableDynamicQuery(
-			portletDataContext);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
-		getIndexableActionableDynamicQuery() {
-
-		return _accountLocalService.getIndexableActionableDynamicQuery();
-	}
-
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -412,12 +394,12 @@ public class AccountLocalServiceWrapper
 
 	@Override
 	public com.liferay.docs.amf.model.Account updateAccount(
-			long accountId, String firstName, String lastName,
+			String accountId, String firstName, String lastName,
 			String emailAddress, String userName_, String gender,
-			java.util.Date birthday, String password1, String password2,
-			int homePhone, int mobilePhone, String address, String address2,
-			String city, String state, String zip, String securityQuestion,
-			String securityAnswer, String acceptedTou)
+			String birthday, String password1, String password2,
+			String homePhone, String mobilePhone, String address,
+			String address2, String city, String state, String zip,
+			String securityQuestion, String securityAnswer, String acceptedTou)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _accountLocalService.updateAccount(

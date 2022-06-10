@@ -81,7 +81,7 @@ public class AccountWrapper
 			setUuid(uuid);
 		}
 
-		Long accountId = (Long)attributes.get("accountId");
+		String accountId = (String)attributes.get("accountId");
 
 		if (accountId != null) {
 			setAccountId(accountId);
@@ -153,7 +153,7 @@ public class AccountWrapper
 			setGender(gender);
 		}
 
-		Date birthday = (Date)attributes.get("birthday");
+		String birthday = (String)attributes.get("birthday");
 
 		if (birthday != null) {
 			setBirthday(birthday);
@@ -171,13 +171,13 @@ public class AccountWrapper
 			setPassword2(password2);
 		}
 
-		Integer homePhone = (Integer)attributes.get("homePhone");
+		String homePhone = (String)attributes.get("homePhone");
 
 		if (homePhone != null) {
 			setHomePhone(homePhone);
 		}
 
-		Integer mobilePhone = (Integer)attributes.get("mobilePhone");
+		String mobilePhone = (String)attributes.get("mobilePhone");
 
 		if (mobilePhone != null) {
 			setMobilePhone(mobilePhone);
@@ -253,7 +253,7 @@ public class AccountWrapper
 	 * @return the account ID of this account
 	 */
 	@Override
-	public long getAccountId() {
+	public String getAccountId() {
 		return model.getAccountId();
 	}
 
@@ -283,7 +283,7 @@ public class AccountWrapper
 	 * @return the birthday of this account
 	 */
 	@Override
-	public Date getBirthday() {
+	public String getBirthday() {
 		return model.getBirthday();
 	}
 
@@ -363,7 +363,7 @@ public class AccountWrapper
 	 * @return the home phone of this account
 	 */
 	@Override
-	public int getHomePhone() {
+	public String getHomePhone() {
 		return model.getHomePhone();
 	}
 
@@ -383,7 +383,7 @@ public class AccountWrapper
 	 * @return the mobile phone of this account
 	 */
 	@Override
-	public int getMobilePhone() {
+	public String getMobilePhone() {
 		return model.getMobilePhone();
 	}
 
@@ -423,7 +423,7 @@ public class AccountWrapper
 	 * @return the primary key of this account
 	 */
 	@Override
-	public long getPrimaryKey() {
+	public String getPrimaryKey() {
 		return model.getPrimaryKey();
 	}
 
@@ -538,7 +538,7 @@ public class AccountWrapper
 	 * @param accountId the account ID of this account
 	 */
 	@Override
-	public void setAccountId(long accountId) {
+	public void setAccountId(String accountId) {
 		model.setAccountId(accountId);
 	}
 
@@ -568,7 +568,7 @@ public class AccountWrapper
 	 * @param birthday the birthday of this account
 	 */
 	@Override
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		model.setBirthday(birthday);
 	}
 
@@ -648,7 +648,7 @@ public class AccountWrapper
 	 * @param homePhone the home phone of this account
 	 */
 	@Override
-	public void setHomePhone(int homePhone) {
+	public void setHomePhone(String homePhone) {
 		model.setHomePhone(homePhone);
 	}
 
@@ -668,7 +668,7 @@ public class AccountWrapper
 	 * @param mobilePhone the mobile phone of this account
 	 */
 	@Override
-	public void setMobilePhone(int mobilePhone) {
+	public void setMobilePhone(String mobilePhone) {
 		model.setMobilePhone(mobilePhone);
 	}
 
@@ -708,7 +708,7 @@ public class AccountWrapper
 	 * @param primaryKey the primary key of this account
 	 */
 	@Override
-	public void setPrimaryKey(long primaryKey) {
+	public void setPrimaryKey(String primaryKey) {
 		model.setPrimaryKey(primaryKey);
 	}
 

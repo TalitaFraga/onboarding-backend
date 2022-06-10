@@ -65,22 +65,21 @@ public class AccountLocalServiceUtil {
 	 * @param accountId the primary key for the new account
 	 * @return the new account
 	 */
-	public static Account createAccount(long accountId) {
+	public static Account createAccount(String accountId) {
 		return getService().createAccount(accountId);
 	}
 
 	public static Account createAccount(
-		long accountId, String firstName, String lastName, String emailAddress,
-		String userName_, String gender, java.util.Date birthday,
-		String password1, String password2, int homePhone, int mobilePhone,
-		String address, String address2, String city, String state, String zip,
+		String firstName, String lastName, String emailAddress,
+		String userName_, String gender, String birthday, String password1,
+		String password2, String homePhone, String mobilePhone, String address,
+		String address2, String city, String state, String zip,
 		String securityQuestion, String securityAnswer, String acceptedTou) {
 
 		return getService().createAccount(
-			accountId, firstName, lastName, emailAddress, userName_, gender,
-			birthday, password1, password2, homePhone, mobilePhone, address,
-			address2, city, state, zip, securityQuestion, securityAnswer,
-			acceptedTou);
+			firstName, lastName, emailAddress, userName_, gender, birthday,
+			password1, password2, homePhone, mobilePhone, address, address2,
+			city, state, zip, securityQuestion, securityAnswer, acceptedTou);
 	}
 
 	/**
@@ -107,6 +106,10 @@ public class AccountLocalServiceUtil {
 		return getService().deleteAccount(account);
 	}
 
+	public static Account deleteAccount(long accountId) throws PortalException {
+		return getService().deleteAccount(accountId);
+	}
+
 	/**
 	 * Deletes the account with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
@@ -118,7 +121,9 @@ public class AccountLocalServiceUtil {
 	 * @return the account that was removed
 	 * @throws PortalException if a account with the primary key could not be found
 	 */
-	public static Account deleteAccount(long accountId) throws PortalException {
+	public static Account deleteAccount(String accountId)
+		throws PortalException {
+
 		return getService().deleteAccount(accountId);
 	}
 
@@ -217,7 +222,7 @@ public class AccountLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static Account fetchAccount(long accountId) {
+	public static Account fetchAccount(String accountId) {
 		return getService().fetchAccount(accountId);
 	}
 
@@ -241,7 +246,7 @@ public class AccountLocalServiceUtil {
 	 * @return the account
 	 * @throws PortalException if a account with the primary key could not be found
 	 */
-	public static Account getAccount(long accountId) throws PortalException {
+	public static Account getAccount(String accountId) throws PortalException {
 		return getService().getAccount(accountId);
 	}
 
@@ -314,27 +319,6 @@ public class AccountLocalServiceUtil {
 		return getService().getAccountsCount();
 	}
 
-	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
-		getActionableDynamicQuery() {
-
-		return getService().getActionableDynamicQuery();
-	}
-
-	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
-		getExportActionableDynamicQuery(
-			com.liferay.exportimport.kernel.lar.PortletDataContext
-				portletDataContext) {
-
-		return getService().getExportActionableDynamicQuery(portletDataContext);
-	}
-
-	public static
-		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
-			getIndexableActionableDynamicQuery() {
-
-		return getService().getIndexableActionableDynamicQuery();
-	}
-
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -368,12 +352,12 @@ public class AccountLocalServiceUtil {
 	}
 
 	public static Account updateAccount(
-			long accountId, String firstName, String lastName,
+			String accountId, String firstName, String lastName,
 			String emailAddress, String userName_, String gender,
-			java.util.Date birthday, String password1, String password2,
-			int homePhone, int mobilePhone, String address, String address2,
-			String city, String state, String zip, String securityQuestion,
-			String securityAnswer, String acceptedTou)
+			String birthday, String password1, String password2,
+			String homePhone, String mobilePhone, String address,
+			String address2, String city, String state, String zip,
+			String securityQuestion, String securityAnswer, String acceptedTou)
 		throws PortalException {
 
 		return getService().updateAccount(

@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Reference;
 )
 @Generated("")
 @OpenAPIDefinition(
-	info = @Info(description = "AmfRegistrationRest REST API", license = @License(name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0.html"), title = "AmfRegistrationRest", version = "v1.0")
+	info = @Info(description = "The Sample API made with rest builder. A Java client JAR is available for use with the group ID 'com.liferay', artifact ID 'com.liferay.sample.client', and version '1.0.0'.. A Java client JAR is available for use with the group ID 'com.liferay', artifact ID 'com.liferay.amf.client', and version '1.0.0'.. A Java client JAR is available for use with the group ID 'com.liferay', artifact ID 'com.liferay.amf.rest.client', and version '1.0.0'.", license = @License(name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0.html"), title = "Acme Movie Fanatics (AMF)  API", version = "v1.0")
 )
 @Path("/v1.0")
 public class OpenAPIResourceImpl {

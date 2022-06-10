@@ -61,7 +61,7 @@ public class Query {
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {account(accountId: ___){firstName, lastName, emailAddress, userName_, gender, birthday, password1, password2, homePhone, mobilePhone, address, address2, city, state, zip, securityQuestion, securityAnswer, acceptedTou}}"}' -u 'test@liferay.com:test'
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {account(accountId: ___){firstName, lastName, emailAddress, userName_, genre, birthday, password, Password2, homePhone, mobilePhone, address1, address2, city, state, zip, securityQuestion, securityAnswer, acceptedTou}}"}' -u 'test@liferay.com:test'
 	 */
 	@GraphQLField
 	public Account account(@GraphQLName("accountId") String accountId)

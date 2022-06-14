@@ -43,7 +43,7 @@
             <aui:input
               required="true"
               label="username"
-              name="userName"
+              name="userName_"
               type="text"
             >
               <aui:validator name="alphanum" />

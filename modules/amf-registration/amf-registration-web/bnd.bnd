@@ -1,4 +1,4 @@
 Bundle-Name: amf-registration-web
-Bundle-SymbolicName: com.liferay.docs.mvcportlet
+Bundle-SymbolicName: com.liferay.docs.amf.web
 Bundle-Version: 1.0.0
-Export-Package: com.liferay.docs.mvcportlet.constants
+Export-Package: com.liferay.docs.amf.web.constants

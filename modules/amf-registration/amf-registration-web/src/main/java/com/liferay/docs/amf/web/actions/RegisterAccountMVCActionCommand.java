@@ -1,7 +1,6 @@
 package com.liferay.docs.amf.web.actions;
 
 import com.liferay.docs.amf.web.constants.AccountWebPortletKeys;
-
 import com.liferay.docs.amf.service.AccountLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -15,7 +14,7 @@ import javax.portlet.ActionResponse;
 @Component(
         immediate = true,
         property = {
-                "javax.portlet.name=" + AccountWebPortletKeys.ACCOUNTWEB,
+                "javax.portlet.name=" + AccountWebPortletKeys.ACCOUNT,
                 "mvc.command.name=/add-account"
         },
         service = MVCActionCommand.class

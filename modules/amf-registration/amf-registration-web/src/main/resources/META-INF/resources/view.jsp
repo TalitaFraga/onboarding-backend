@@ -1,8 +1,9 @@
 <%@ include file="/init.jsp" %>
 
+<portlet:actionURL name="/add-account" var="addAccount"/>
 
 <main class="col-lg-6 mx-auto">
-  <aui:form name="amf-registration" onsubmit="handleOnSubmit(event)">
+  <aui:form name="amf-registration" action="<%= addAccount %>" >
     <aui:fieldset-group markupView="lexicon">
       <aui:fieldset label="basic-info">
         <aui:row>
@@ -43,7 +44,7 @@
             <aui:input
               required="true"
               label="username"
-              name="userName_"
+              name="userName"
               type="text"
             >
               <aui:validator name="alphanum" />
@@ -71,7 +72,7 @@
             >
               <aui:validator name="date" />
               <aui:validator
-                errorMessage="Must be at least 13 years old to register."
+                errorMessage="Must be at leaswt 13 years old to register."
                 name="custom"
               >
                 function underAgeValidate(birthday){ var optimizedBirthday =
@@ -115,7 +116,6 @@
         </aui:row>
       </aui:fieldset>
     </aui:fieldset-group>
-
     <aui:fieldset-group markupView="lexicon">
       <aui:fieldset label="phone-info">
         <aui:row>
@@ -136,7 +136,6 @@
         </aui:row>
       </aui:fieldset>
     </aui:fieldset-group>
-
     <aui:fieldset-group markupView="lexicon">
       <aui:fieldset label="billing-address">
         <aui:row>
@@ -184,7 +183,6 @@
         </aui:row>
       </aui:fieldset>
     </aui:fieldset-group>
-
     <aui:fieldset-group markupView="lexicon">
       <aui:fieldset label="misc">
         <aui:row>
@@ -236,45 +234,3 @@
     </aui:button-row>
   </aui:form>
 </main>
-
-<aui:script>
-
-function formatDate(date) {
-  return (
-    date.getFullYear() +
-    '-' +
-    (date.getMonth() + 1) +
-    '-' +
-    date.getDate() +
-    ' ' +
-    date.toLocaleTimeString('pt-br')
-  );
-}
-function handleOnSubmit(event) {
-  event.preventDefault();
-
-  const formData = new FormData(event.target);
-  const formProps = Object.fromEntries(formData);
-
-  const data = Object.entries(formProps).reduce(function (acc, formData) {
-    const [key, value] = formData;
-    const keyFormatted = key.split('_').pop();
-    return { ...acc, [keyFormatted]: value === 'on' ? true : value };
-  }, {});
-
-  let formattedData = {
-    ...data,
-    birthday: formatDate(new Date(data.birthday)),
-    createDate: formatDate(new Date()),
-    modifiedDate: formatDate(new Date()),
-  };
-
-  delete formattedData.formDate;
-
-  fetch('http://localhost:8080/o/accounts/add?p_auth=' + Liferay.authToken, {
-    body: JSON.stringify(formattedData),
-    headers: { 'Content-Type': 'application/json' },
-    method: 'POST',
-  });
-}
-</aui:script>

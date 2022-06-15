@@ -5,7 +5,7 @@ package com.liferay.docs.amf.web.constants;
  */
 public class AccountWebPortletKeys {
 
-	public static final String ACCOUNTWEB =
+	public static final String ACCOUNT =
 		"com_liferay_docs_amf_web_AccountWebPortlet";
 
 }

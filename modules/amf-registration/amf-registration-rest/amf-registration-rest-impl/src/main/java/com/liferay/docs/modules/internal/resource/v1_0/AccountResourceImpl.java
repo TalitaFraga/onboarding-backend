@@ -1,37 +1,30 @@
 package com.liferay.docs.modules.internal.resource.v1_0;
 
 import com.liferay.docs.amf.service.AccountLocalService;
-import com.liferay.docs.modules.dto.v1_0.Account;
+import com.liferay.docs.modules.dto.v1_0.AccountDTO;
 import com.liferay.docs.modules.resource.v1_0.AccountResource;
-
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
-
 
 /**
  * @author TalitaFraga
  */
 @Component(
-	properties = "OSGI-INF/liferay/rest/v1_0/account.properties",
-	scope = ServiceScope.PROTOTYPE, service = AccountResource.class
+        properties = "OSGI-INF/liferay/rest/v1_0/account.properties",
+        scope = ServiceScope.PROTOTYPE, service = AccountResource.class
 )
-public class AccountResourceImpl extends BaseAccountResourceImpl {
+public abstract class AccountResourceImpl extends BaseAccountResourceImpl {
 
-@Override
-public Account createAccount(Account account) throws Exception {
-	_accountLocalService.createAccount(account.getFirstName(), account.getLastName(), account.getEmailAddress(),
-			account.getUserName_(), account.getGenre(), account.getBirthday(), account.getPassword(),
-			account.getPassword2(), account.getHomePhone(), account.getMobilePhone(), account.getAddress1(),
-			account.getAddress2(), account.getCity(), account.getState(), account.getZip(),
-			account.getSecurityQuestion(), account.getSecurityAnswer(), account.getAcceptedTou());
-	return account;
-}
-
-
-@Reference
-	private AccountLocalService _accountLocalService;
-
-
+    @Override
+    public AccountDTO createAccount(AccountDTO accountDTO) throws Exception {
+        _accountLocalService.createAccount(accountDTO.getFirstName(), accountDTO.getLastName(), accountDTO.getEmailAddress(),
+                accountDTO.getUserName_(), accountDTO.getGenre(), accountDTO.getBirthday(), accountDTO.getPassword(),
+                accountDTO.getPassword2(), accountDTO.getHomePhone(), accountDTO.getMobilePhone(), accountDTO.getAddress1(),
+                accountDTO.getAddress2(), accountDTO.getCity(), accountDTO.getState(), accountDTO.getZip(),
+                accountDTO.getSecurityQuestion(), accountDTO.getSecurityAnswer(), accountDTO.getAcceptedTou());
+        return accountDTO;
+    }
+    @Reference
+    private AccountLocalService _accountLocalService;
 }

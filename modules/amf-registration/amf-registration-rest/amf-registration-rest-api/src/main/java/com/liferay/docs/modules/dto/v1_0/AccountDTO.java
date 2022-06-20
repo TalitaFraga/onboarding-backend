@@ -31,18 +31,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName(
 	description = "A sample api of Acme Movie Fanatics (AMF).",
-	value = "Account"
+	value = "AccountDTO"
 )
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "Account")
-public class Account implements Serializable {
+@XmlRootElement(name = "AccountDTO")
+public class AccountDTO implements Serializable {
 
-	public static Account toDTO(String json) {
-		return ObjectMapperUtil.readValue(Account.class, json);
+	public static AccountDTO toDTO(String json) {
+		return ObjectMapperUtil.readValue(AccountDTO.class, json);
 	}
 
-	public static Account unsafeToDTO(String json) {
-		return ObjectMapperUtil.unsafeReadValue(Account.class, json);
+	public static AccountDTO unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(AccountDTO.class, json);
 	}
 
 	@Schema(description = "The password.")
@@ -551,13 +551,13 @@ public class Account implements Serializable {
 			return true;
 		}
 
-		if (!(object instanceof Account)) {
+		if (!(object instanceof AccountDTO)) {
 			return false;
 		}
 
-		Account account = (Account)object;
+		AccountDTO accountDTO = (AccountDTO)object;
 
-		return Objects.equals(toString(), account.toString());
+		return Objects.equals(toString(), accountDTO.toString());
 	}
 
 	@Override
@@ -831,7 +831,7 @@ public class Account implements Serializable {
 
 	@Schema(
 		accessMode = Schema.AccessMode.READ_ONLY,
-		defaultValue = "com.liferay.docs.modules.dto.v1_0.Account",
+		defaultValue = "com.liferay.docs.modules.dto.v1_0.AccountDTO",
 		name = "x-class-name"
 	)
 	public String xClassName;

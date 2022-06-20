@@ -48,9 +48,8 @@ public class RegisterAccountMVCActionCommand extends BaseMVCActionCommand {
                 password2, homePhone, mobilePhone, address, address2, city, state, zip, securityQuestion,
                 securityAnswer, acceptedTou);
 
-
-        System.out.println("created");
     }
+
     @Reference
     private AccountLocalService _accountLocalService;
 }

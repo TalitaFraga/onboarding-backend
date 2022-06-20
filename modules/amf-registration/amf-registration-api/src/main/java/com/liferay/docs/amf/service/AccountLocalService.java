@@ -15,8 +15,12 @@
 package com.liferay.docs.amf.service;
 
 import com.liferay.docs.amf.model.Account;
+import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.petra.sql.dsl.query.DSLQuery;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -80,7 +84,7 @@ public interface AccountLocalService
 	 * @return the new account
 	 */
 	@Transactional(enabled = false)
-	public Account createAccount(String accountId);
+	public Account createAccount(long accountId);
 
 	public Account createAccount(
 		String firstName, String lastName, String emailAddress,
@@ -108,8 +112,6 @@ public interface AccountLocalService
 	@Indexable(type = IndexableType.DELETE)
 	public Account deleteAccount(Account account);
 
-	public Account deleteAccount(long accountId) throws PortalException;
-
 	/**
 	 * Deletes the account with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
@@ -122,7 +124,7 @@ public interface AccountLocalService
 	 * @throws PortalException if a account with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public Account deleteAccount(String accountId) throws PortalException;
+	public Account deleteAccount(long accountId) throws PortalException;
 
 	/**
 	 * @throws PortalException
@@ -204,7 +206,7 @@ public interface AccountLocalService
 		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Account fetchAccount(String accountId);
+	public Account fetchAccount(long accountId);
 
 	/**
 	 * Returns the account matching the UUID and group.
@@ -224,7 +226,7 @@ public interface AccountLocalService
 	 * @throws PortalException if a account with the primary key could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Account getAccount(String accountId) throws PortalException;
+	public Account getAccount(long accountId) throws PortalException;
 
 	/**
 	 * Returns the account matching the UUID and group.
@@ -285,6 +287,16 @@ public interface AccountLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAccountsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public ActionableDynamicQuery getActionableDynamicQuery();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		PortletDataContext portletDataContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
 	 * Returns the OSGi service identifier.

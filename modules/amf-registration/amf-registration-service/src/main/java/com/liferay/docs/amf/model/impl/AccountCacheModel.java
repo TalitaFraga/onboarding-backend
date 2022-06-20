@@ -46,7 +46,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 
 		AccountCacheModel accountCacheModel = (AccountCacheModel)object;
 
-		if (accountId.equals(accountCacheModel.accountId)) {
+		if (accountId == accountCacheModel.accountId) {
 			return true;
 		}
 
@@ -130,13 +130,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			accountImpl.setUuid(uuid);
 		}
 
-		if (accountId == null) {
-			accountImpl.setAccountId("");
-		}
-		else {
-			accountImpl.setAccountId(accountId);
-		}
-
+		accountImpl.setAccountId(accountId);
 		accountImpl.setGroupId(groupId);
 		accountImpl.setCompanyId(companyId);
 		accountImpl.setUserId(userId);
@@ -197,11 +191,11 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			accountImpl.setGender(gender);
 		}
 
-		if (birthday == null) {
-			accountImpl.setBirthday("");
+		if (birthday == Long.MIN_VALUE) {
+			accountImpl.setBirthday(null);
 		}
 		else {
-			accountImpl.setBirthday(birthday);
+			accountImpl.setBirthday(new Date(birthday));
 		}
 
 		if (password1 == null) {
@@ -296,7 +290,8 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
-		accountId = objectInput.readUTF();
+
+		accountId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
 
@@ -311,7 +306,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		emailAddress = objectInput.readUTF();
 		userName_ = objectInput.readUTF();
 		gender = objectInput.readUTF();
-		birthday = objectInput.readUTF();
+		birthday = objectInput.readLong();
 		password1 = objectInput.readUTF();
 		password2 = objectInput.readUTF();
 		homePhone = objectInput.readUTF();
@@ -335,12 +330,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			objectOutput.writeUTF(uuid);
 		}
 
-		if (accountId == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(accountId);
-		}
+		objectOutput.writeLong(accountId);
 
 		objectOutput.writeLong(groupId);
 
@@ -393,12 +383,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			objectOutput.writeUTF(gender);
 		}
 
-		if (birthday == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(birthday);
-		}
+		objectOutput.writeLong(birthday);
 
 		if (password1 == null) {
 			objectOutput.writeUTF("");
@@ -486,7 +471,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 	}
 
 	public String uuid;
-	public String accountId;
+	public long accountId;
 	public long groupId;
 	public long companyId;
 	public long userId;
@@ -498,7 +483,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 	public String emailAddress;
 	public String userName_;
 	public String gender;
-	public String birthday;
+	public long birthday;
 	public String password1;
 	public String password2;
 	public String homePhone;

@@ -14,6 +14,7 @@
 
 package com.liferay.docs.amf.model;
 
+import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.GroupedModel;
@@ -50,14 +51,14 @@ public interface AccountModel
 	 *
 	 * @return the primary key of this account
 	 */
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this account.
 	 *
 	 * @param primaryKey the primary key of this account
 	 */
-	public void setPrimaryKey(String primaryKey);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Returns the uuid of this account.
@@ -81,15 +82,14 @@ public interface AccountModel
 	 *
 	 * @return the account ID of this account
 	 */
-	@AutoEscape
-	public String getAccountId();
+	public long getAccountId();
 
 	/**
 	 * Sets the account ID of this account.
 	 *
 	 * @param accountId the account ID of this account
 	 */
-	public void setAccountId(String accountId);
+	public void setAccountId(long accountId);
 
 	/**
 	 * Returns the group ID of this account.
@@ -284,15 +284,14 @@ public interface AccountModel
 	 *
 	 * @return the birthday of this account
 	 */
-	@AutoEscape
-	public String getBirthday();
+	public UnsafeSupplier<String, Exception> getBirthday();
 
 	/**
 	 * Sets the birthday of this account.
 	 *
 	 * @param birthday the birthday of this account
 	 */
-	public void setBirthday(String birthday);
+	public void setBirthday(Date birthday);
 
 	/**
 	 * Returns the password1 of this account.

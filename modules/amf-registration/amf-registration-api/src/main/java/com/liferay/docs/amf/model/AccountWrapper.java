@@ -15,6 +15,7 @@
 package com.liferay.docs.amf.model;
 
 import com.liferay.exportimport.kernel.lar.StagedModelType;
+import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
@@ -81,7 +82,7 @@ public class AccountWrapper
 			setUuid(uuid);
 		}
 
-		String accountId = (String)attributes.get("accountId");
+		Long accountId = (Long)attributes.get("accountId");
 
 		if (accountId != null) {
 			setAccountId(accountId);
@@ -153,7 +154,7 @@ public class AccountWrapper
 			setGender(gender);
 		}
 
-		String birthday = (String)attributes.get("birthday");
+		Date birthday = (Date)attributes.get("birthday");
 
 		if (birthday != null) {
 			setBirthday(birthday);
@@ -253,7 +254,7 @@ public class AccountWrapper
 	 * @return the account ID of this account
 	 */
 	@Override
-	public String getAccountId() {
+	public long getAccountId() {
 		return model.getAccountId();
 	}
 
@@ -278,12 +279,12 @@ public class AccountWrapper
 	}
 
 	/**
-	 * Returns the birthday of this account.
-	 *
-	 * @return the birthday of this account
-	 */
+     * Returns the birthday of this account.
+     *
+     * @return the birthday of this account
+     */
 	@Override
-	public String getBirthday() {
+	public UnsafeSupplier<String, Exception> getBirthday() {
 		return model.getBirthday();
 	}
 
@@ -423,7 +424,7 @@ public class AccountWrapper
 	 * @return the primary key of this account
 	 */
 	@Override
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return model.getPrimaryKey();
 	}
 
@@ -538,7 +539,7 @@ public class AccountWrapper
 	 * @param accountId the account ID of this account
 	 */
 	@Override
-	public void setAccountId(String accountId) {
+	public void setAccountId(long accountId) {
 		model.setAccountId(accountId);
 	}
 
@@ -568,7 +569,7 @@ public class AccountWrapper
 	 * @param birthday the birthday of this account
 	 */
 	@Override
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		model.setBirthday(birthday);
 	}
 
@@ -708,7 +709,7 @@ public class AccountWrapper
 	 * @param primaryKey the primary key of this account
 	 */
 	@Override
-	public void setPrimaryKey(String primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		model.setPrimaryKey(primaryKey);
 	}
 

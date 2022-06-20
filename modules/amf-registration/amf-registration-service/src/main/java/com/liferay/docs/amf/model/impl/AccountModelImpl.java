@@ -16,7 +16,10 @@ package com.liferay.docs.amf.model.impl;
 
 import com.liferay.docs.amf.model.Account;
 import com.liferay.docs.amf.model.AccountModel;
+import com.liferay.expando.kernel.model.ExpandoBridge;
+import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
+import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -25,6 +28,7 @@ import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -70,13 +74,13 @@ public class AccountModelImpl
 	public static final String TABLE_NAME = "AMF_Account";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", Types.VARCHAR}, {"accountId", Types.VARCHAR},
+		{"uuid_", Types.VARCHAR}, {"accountId", Types.BIGINT},
 		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
 		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
 		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
 		{"firstName", Types.VARCHAR}, {"lastName", Types.VARCHAR},
 		{"emailAddress", Types.VARCHAR}, {"userName_", Types.VARCHAR},
-		{"gender", Types.VARCHAR}, {"birthday", Types.VARCHAR},
+		{"gender", Types.VARCHAR}, {"birthday", Types.TIMESTAMP},
 		{"password1", Types.VARCHAR}, {"password2", Types.VARCHAR},
 		{"homePhone", Types.VARCHAR}, {"mobilePhone", Types.VARCHAR},
 		{"address", Types.VARCHAR}, {"address2", Types.VARCHAR},
@@ -90,7 +94,7 @@ public class AccountModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("accountId", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("accountId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
@@ -102,7 +106,7 @@ public class AccountModelImpl
 		TABLE_COLUMNS_MAP.put("emailAddress", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("userName_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("gender", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("birthday", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("birthday", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("password1", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("password2", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("homePhone", Types.VARCHAR);
@@ -118,7 +122,7 @@ public class AccountModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table AMF_Account (uuid_ VARCHAR(75) null,accountId VARCHAR(75) not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,emailAddress VARCHAR(75) null,userName_ VARCHAR(75) null,gender VARCHAR(75) null,birthday VARCHAR(75) null,password1 VARCHAR(75) null,password2 VARCHAR(75) null,homePhone VARCHAR(75) null,mobilePhone VARCHAR(75) null,address VARCHAR(75) null,address2 VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,zip VARCHAR(75) null,securityQuestion VARCHAR(75) null,securityAnswer VARCHAR(75) null,acceptedTou VARCHAR(75) null)";
+		"create table AMF_Account (uuid_ VARCHAR(75) null,accountId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,emailAddress VARCHAR(75) null,userName_ VARCHAR(75) null,gender VARCHAR(75) null,birthday DATE null,password1 VARCHAR(75) null,password2 VARCHAR(75) null,homePhone VARCHAR(75) null,mobilePhone VARCHAR(75) null,address VARCHAR(75) null,address2 VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,zip VARCHAR(75) null,securityQuestion VARCHAR(75) null,securityAnswer VARCHAR(75) null,acceptedTou VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table AMF_Account";
 
@@ -177,12 +181,12 @@ public class AccountModelImpl
 	}
 
 	@Override
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _accountId;
 	}
 
 	@Override
-	public void setPrimaryKey(String primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		setAccountId(primaryKey);
 	}
 
@@ -193,7 +197,7 @@ public class AccountModelImpl
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey((String)primaryKeyObj);
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	@Override
@@ -273,7 +277,7 @@ public class AccountModelImpl
 			"uuid", (BiConsumer<Account, String>)Account::setUuid);
 		attributeGetterFunctions.put("accountId", Account::getAccountId);
 		attributeSetterBiConsumers.put(
-			"accountId", (BiConsumer<Account, String>)Account::setAccountId);
+			"accountId", (BiConsumer<Account, Long>)Account::setAccountId);
 		attributeGetterFunctions.put("groupId", Account::getGroupId);
 		attributeSetterBiConsumers.put(
 			"groupId", (BiConsumer<Account, Long>)Account::setGroupId);
@@ -311,7 +315,7 @@ public class AccountModelImpl
 			"gender", (BiConsumer<Account, String>)Account::setGender);
 		attributeGetterFunctions.put("birthday", Account::getBirthday);
 		attributeSetterBiConsumers.put(
-			"birthday", (BiConsumer<Account, String>)Account::setBirthday);
+			"birthday", (BiConsumer<Account, Date>)Account::setBirthday);
 		attributeGetterFunctions.put("password1", Account::getPassword1);
 		attributeSetterBiConsumers.put(
 			"password1", (BiConsumer<Account, String>)Account::setPassword1);
@@ -392,17 +396,12 @@ public class AccountModelImpl
 
 	@JSON
 	@Override
-	public String getAccountId() {
-		if (_accountId == null) {
-			return "";
-		}
-		else {
-			return _accountId;
-		}
+	public long getAccountId() {
+		return _accountId;
 	}
 
 	@Override
-	public void setAccountId(String accountId) {
+	public void setAccountId(long accountId) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -648,17 +647,12 @@ public class AccountModelImpl
 
 	@JSON
 	@Override
-	public String getBirthday() {
-		if (_birthday == null) {
-			return "";
-		}
-		else {
-			return _birthday;
-		}
+	public UnsafeSupplier<String, Exception> getBirthday() {
+		return _birthday;
 	}
 
 	@Override
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -937,6 +931,19 @@ public class AccountModelImpl
 	}
 
 	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(
+			getCompanyId(), Account.class.getName(), getPrimaryKey());
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+	}
+
+	@Override
 	public Account toEscapedModel() {
 		if (_escapedModel == null) {
 			Function<InvocationHandler, Account>
@@ -993,7 +1000,7 @@ public class AccountModelImpl
 
 		accountImpl.setUuid(this.<String>getColumnOriginalValue("uuid_"));
 		accountImpl.setAccountId(
-			this.<String>getColumnOriginalValue("accountId"));
+			this.<Long>getColumnOriginalValue("accountId"));
 		accountImpl.setGroupId(this.<Long>getColumnOriginalValue("groupId"));
 		accountImpl.setCompanyId(
 			this.<Long>getColumnOriginalValue("companyId"));
@@ -1013,8 +1020,7 @@ public class AccountModelImpl
 		accountImpl.setUserName_(
 			this.<String>getColumnOriginalValue("userName_"));
 		accountImpl.setGender(this.<String>getColumnOriginalValue("gender"));
-		accountImpl.setBirthday(
-			this.<String>getColumnOriginalValue("birthday"));
+		accountImpl.setBirthday(this.<Date>getColumnOriginalValue("birthday"));
 		accountImpl.setPassword1(
 			this.<String>getColumnOriginalValue("password1"));
 		accountImpl.setPassword2(
@@ -1064,9 +1070,9 @@ public class AccountModelImpl
 
 		Account account = (Account)object;
 
-		String primaryKey = account.getPrimaryKey();
+		long primaryKey = account.getPrimaryKey();
 
-		if (getPrimaryKey().equals(primaryKey)) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {
@@ -1076,7 +1082,7 @@ public class AccountModelImpl
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
 	/**
@@ -1119,12 +1125,6 @@ public class AccountModelImpl
 		}
 
 		accountCacheModel.accountId = getAccountId();
-
-		String accountId = accountCacheModel.accountId;
-
-		if ((accountId != null) && (accountId.length() == 0)) {
-			accountCacheModel.accountId = null;
-		}
 
 		accountCacheModel.groupId = getGroupId();
 
@@ -1198,12 +1198,13 @@ public class AccountModelImpl
 			accountCacheModel.gender = null;
 		}
 
-		accountCacheModel.birthday = getBirthday();
+		Date birthday = getBirthday();
 
-		String birthday = accountCacheModel.birthday;
-
-		if ((birthday != null) && (birthday.length() == 0)) {
-			accountCacheModel.birthday = null;
+		if (birthday != null) {
+			accountCacheModel.birthday = birthday.getTime();
+		}
+		else {
+			accountCacheModel.birthday = Long.MIN_VALUE;
 		}
 
 		accountCacheModel.password1 = getPassword1();
@@ -1395,7 +1396,7 @@ public class AccountModelImpl
 	}
 
 	private String _uuid;
-	private String _accountId;
+	private long _accountId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -1408,7 +1409,7 @@ public class AccountModelImpl
 	private String _emailAddress;
 	private String _userName_;
 	private String _gender;
-	private String _birthday;
+	private Date _birthday;
 	private String _password1;
 	private String _password2;
 	private String _homePhone;

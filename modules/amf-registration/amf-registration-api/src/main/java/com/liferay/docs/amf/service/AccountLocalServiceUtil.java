@@ -65,7 +65,7 @@ public class AccountLocalServiceUtil {
 	 * @param accountId the primary key for the new account
 	 * @return the new account
 	 */
-	public static Account createAccount(String accountId) {
+	public static Account createAccount(long accountId) {
 		return getService().createAccount(accountId);
 	}
 
@@ -106,10 +106,6 @@ public class AccountLocalServiceUtil {
 		return getService().deleteAccount(account);
 	}
 
-	public static Account deleteAccount(long accountId) throws PortalException {
-		return getService().deleteAccount(accountId);
-	}
-
 	/**
 	 * Deletes the account with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
@@ -121,9 +117,7 @@ public class AccountLocalServiceUtil {
 	 * @return the account that was removed
 	 * @throws PortalException if a account with the primary key could not be found
 	 */
-	public static Account deleteAccount(String accountId)
-		throws PortalException {
-
+	public static Account deleteAccount(long accountId) throws PortalException {
 		return getService().deleteAccount(accountId);
 	}
 
@@ -222,7 +216,7 @@ public class AccountLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static Account fetchAccount(String accountId) {
+	public static Account fetchAccount(long accountId) {
 		return getService().fetchAccount(accountId);
 	}
 
@@ -246,7 +240,7 @@ public class AccountLocalServiceUtil {
 	 * @return the account
 	 * @throws PortalException if a account with the primary key could not be found
 	 */
-	public static Account getAccount(String accountId) throws PortalException {
+	public static Account getAccount(long accountId) throws PortalException {
 		return getService().getAccount(accountId);
 	}
 
@@ -317,6 +311,27 @@ public class AccountLocalServiceUtil {
 	 */
 	public static int getAccountsCount() {
 		return getService().getAccountsCount();
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
+		getActionableDynamicQuery() {
+
+		return getService().getActionableDynamicQuery();
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
+		getExportActionableDynamicQuery(
+			com.liferay.exportimport.kernel.lar.PortletDataContext
+				portletDataContext) {
+
+		return getService().getExportActionableDynamicQuery(portletDataContext);
+	}
+
+	public static
+		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
+			getIndexableActionableDynamicQuery() {
+
+		return getService().getIndexableActionableDynamicQuery();
 	}
 
 	/**

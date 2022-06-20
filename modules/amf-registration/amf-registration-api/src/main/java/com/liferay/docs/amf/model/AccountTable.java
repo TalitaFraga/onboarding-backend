@@ -34,8 +34,8 @@ public class AccountTable extends BaseTable<AccountTable> {
 
 	public final Column<AccountTable, String> uuid = createColumn(
 		"uuid_", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
-	public final Column<AccountTable, String> accountId = createColumn(
-		"accountId", String.class, Types.VARCHAR, Column.FLAG_PRIMARY);
+	public final Column<AccountTable, Long> accountId = createColumn(
+		"accountId", Long.class, Types.BIGINT, Column.FLAG_PRIMARY);
 	public final Column<AccountTable, Long> groupId = createColumn(
 		"groupId", Long.class, Types.BIGINT, Column.FLAG_DEFAULT);
 	public final Column<AccountTable, Long> companyId = createColumn(
@@ -58,8 +58,8 @@ public class AccountTable extends BaseTable<AccountTable> {
 		"userName_", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<AccountTable, String> gender = createColumn(
 		"gender", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
-	public final Column<AccountTable, String> birthday = createColumn(
-		"birthday", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
+	public final Column<AccountTable, Date> birthday = createColumn(
+		"birthday", Date.class, Types.TIMESTAMP, Column.FLAG_DEFAULT);
 	public final Column<AccountTable, String> password1 = createColumn(
 		"password1", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<AccountTable, String> password2 = createColumn(

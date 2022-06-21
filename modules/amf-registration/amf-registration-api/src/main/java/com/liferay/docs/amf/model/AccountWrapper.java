@@ -15,6 +15,7 @@
 package com.liferay.docs.amf.model;
 
 import com.liferay.exportimport.kernel.lar.StagedModelType;
+import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
@@ -171,13 +172,13 @@ public class AccountWrapper
 			setPassword2(password2);
 		}
 
-		Integer homePhone = (Integer)attributes.get("homePhone");
+		String homePhone = (String)attributes.get("homePhone");
 
 		if (homePhone != null) {
 			setHomePhone(homePhone);
 		}
 
-		Integer mobilePhone = (Integer)attributes.get("mobilePhone");
+		String mobilePhone = (String)attributes.get("mobilePhone");
 
 		if (mobilePhone != null) {
 			setMobilePhone(mobilePhone);
@@ -278,12 +279,12 @@ public class AccountWrapper
 	}
 
 	/**
-	 * Returns the birthday of this account.
-	 *
-	 * @return the birthday of this account
-	 */
+     * Returns the birthday of this account.
+     *
+     * @return the birthday of this account
+     */
 	@Override
-	public Date getBirthday() {
+	public UnsafeSupplier<String, Exception> getBirthday() {
 		return model.getBirthday();
 	}
 
@@ -363,7 +364,7 @@ public class AccountWrapper
 	 * @return the home phone of this account
 	 */
 	@Override
-	public int getHomePhone() {
+	public String getHomePhone() {
 		return model.getHomePhone();
 	}
 
@@ -383,7 +384,7 @@ public class AccountWrapper
 	 * @return the mobile phone of this account
 	 */
 	@Override
-	public int getMobilePhone() {
+	public String getMobilePhone() {
 		return model.getMobilePhone();
 	}
 
@@ -648,7 +649,7 @@ public class AccountWrapper
 	 * @param homePhone the home phone of this account
 	 */
 	@Override
-	public void setHomePhone(int homePhone) {
+	public void setHomePhone(String homePhone) {
 		model.setHomePhone(homePhone);
 	}
 
@@ -668,7 +669,7 @@ public class AccountWrapper
 	 * @param mobilePhone the mobile phone of this account
 	 */
 	@Override
-	public void setMobilePhone(int mobilePhone) {
+	public void setMobilePhone(String mobilePhone) {
 		model.setMobilePhone(mobilePhone);
 	}
 

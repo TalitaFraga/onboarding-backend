@@ -14,6 +14,7 @@
 
 package com.liferay.docs.amf.model;
 
+import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.GroupedModel;
@@ -283,7 +284,7 @@ public interface AccountModel
 	 *
 	 * @return the birthday of this account
 	 */
-	public Date getBirthday();
+	public UnsafeSupplier<String, Exception> getBirthday();
 
 	/**
 	 * Sets the birthday of this account.
@@ -327,28 +328,30 @@ public interface AccountModel
 	 *
 	 * @return the home phone of this account
 	 */
-	public int getHomePhone();
+	@AutoEscape
+	public String getHomePhone();
 
 	/**
 	 * Sets the home phone of this account.
 	 *
 	 * @param homePhone the home phone of this account
 	 */
-	public void setHomePhone(int homePhone);
+	public void setHomePhone(String homePhone);
 
 	/**
 	 * Returns the mobile phone of this account.
 	 *
 	 * @return the mobile phone of this account
 	 */
-	public int getMobilePhone();
+	@AutoEscape
+	public String getMobilePhone();
 
 	/**
 	 * Sets the mobile phone of this account.
 	 *
 	 * @param mobilePhone the mobile phone of this account
 	 */
-	public void setMobilePhone(int mobilePhone);
+	public void setMobilePhone(String mobilePhone);
 
 	/**
 	 * Returns the address of this account.

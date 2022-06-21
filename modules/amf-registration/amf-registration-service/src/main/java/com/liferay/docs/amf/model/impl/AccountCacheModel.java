@@ -212,8 +212,19 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			accountImpl.setPassword2(password2);
 		}
 
-		accountImpl.setHomePhone(homePhone);
-		accountImpl.setMobilePhone(mobilePhone);
+		if (homePhone == null) {
+			accountImpl.setHomePhone("");
+		}
+		else {
+			accountImpl.setHomePhone(homePhone);
+		}
+
+		if (mobilePhone == null) {
+			accountImpl.setMobilePhone("");
+		}
+		else {
+			accountImpl.setMobilePhone(mobilePhone);
+		}
 
 		if (address == null) {
 			accountImpl.setAddress("");
@@ -298,10 +309,8 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		birthday = objectInput.readLong();
 		password1 = objectInput.readUTF();
 		password2 = objectInput.readUTF();
-
-		homePhone = objectInput.readInt();
-
-		mobilePhone = objectInput.readInt();
+		homePhone = objectInput.readUTF();
+		mobilePhone = objectInput.readUTF();
 		address = objectInput.readUTF();
 		address2 = objectInput.readUTF();
 		city = objectInput.readUTF();
@@ -390,9 +399,19 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			objectOutput.writeUTF(password2);
 		}
 
-		objectOutput.writeInt(homePhone);
+		if (homePhone == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(homePhone);
+		}
 
-		objectOutput.writeInt(mobilePhone);
+		if (mobilePhone == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(mobilePhone);
+		}
 
 		if (address == null) {
 			objectOutput.writeUTF("");
@@ -467,8 +486,8 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 	public long birthday;
 	public String password1;
 	public String password2;
-	public int homePhone;
-	public int mobilePhone;
+	public String homePhone;
+	public String mobilePhone;
 	public String address;
 	public String address2;
 	public String city;

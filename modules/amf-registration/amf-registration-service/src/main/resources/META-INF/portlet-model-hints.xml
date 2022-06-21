@@ -18,8 +18,8 @@
 		<field name="birthday" type="Date" />
 		<field name="password1" type="String" />
 		<field name="password2" type="String" />
-		<field name="homePhone" type="int" />
-		<field name="mobilePhone" type="int" />
+		<field name="homePhone" type="String" />
+		<field name="mobilePhone" type="String" />
 		<field name="address" type="String" />
 		<field name="address2" type="String" />
 		<field name="city" type="String" />

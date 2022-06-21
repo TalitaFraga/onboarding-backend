@@ -64,10 +64,10 @@ public class AccountTable extends BaseTable<AccountTable> {
 		"password1", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<AccountTable, String> password2 = createColumn(
 		"password2", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
-	public final Column<AccountTable, Integer> homePhone = createColumn(
-		"homePhone", Integer.class, Types.INTEGER, Column.FLAG_DEFAULT);
-	public final Column<AccountTable, Integer> mobilePhone = createColumn(
-		"mobilePhone", Integer.class, Types.INTEGER, Column.FLAG_DEFAULT);
+	public final Column<AccountTable, String> homePhone = createColumn(
+		"homePhone", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
+	public final Column<AccountTable, String> mobilePhone = createColumn(
+		"mobilePhone", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<AccountTable, String> address = createColumn(
 		"address", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<AccountTable, String> address2 = createColumn(

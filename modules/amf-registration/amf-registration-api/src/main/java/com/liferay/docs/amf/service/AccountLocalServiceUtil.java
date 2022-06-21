@@ -70,17 +70,16 @@ public class AccountLocalServiceUtil {
 	}
 
 	public static Account createAccount(
-		long accountId, String firstName, String lastName, String emailAddress,
-		String userName_, String gender, java.util.Date birthday,
-		String password1, String password2, int homePhone, int mobilePhone,
-		String address, String address2, String city, String state, String zip,
+		String firstName, String lastName, String emailAddress,
+		String userName_, String gender, String birthday, String password1,
+		String password2, String homePhone, String mobilePhone, String address,
+		String address2, String city, String state, String zip,
 		String securityQuestion, String securityAnswer, String acceptedTou) {
 
 		return getService().createAccount(
-			accountId, firstName, lastName, emailAddress, userName_, gender,
-			birthday, password1, password2, homePhone, mobilePhone, address,
-			address2, city, state, zip, securityQuestion, securityAnswer,
-			acceptedTou);
+			firstName, lastName, emailAddress, userName_, gender, birthday,
+			password1, password2, homePhone, mobilePhone, address, address2,
+			city, state, zip, securityQuestion, securityAnswer, acceptedTou);
 	}
 
 	/**
@@ -368,12 +367,12 @@ public class AccountLocalServiceUtil {
 	}
 
 	public static Account updateAccount(
-			long accountId, String firstName, String lastName,
+			String accountId, String firstName, String lastName,
 			String emailAddress, String userName_, String gender,
-			java.util.Date birthday, String password1, String password2,
-			int homePhone, int mobilePhone, String address, String address2,
-			String city, String state, String zip, String securityQuestion,
-			String securityAnswer, String acceptedTou)
+			String birthday, String password1, String password2,
+			String homePhone, String mobilePhone, String address,
+			String address2, String city, String state, String zip,
+			String securityQuestion, String securityAnswer, String acceptedTou)
 		throws PortalException {
 
 		return getService().updateAccount(
